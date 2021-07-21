@@ -1,24 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Header from './components/Header';
+import Home from './components/Home';
+import ItemsArea from './components/ItemsArea';
+import Checkout from './components/Checkout';
+import { fetchIngedientsData, gotoPage} from './actions/appActions';
+
 
 function App() {
+  const route = useSelector(state => state.routerReducer).page;
+  const dispatch = useDispatch();
+  
+  useEffect(()=>{
+    dispatch(fetchIngedientsData());
+    dispatch(gotoPage("home"))
+  },[])
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <CssBaseline />
+      <Header />
+      {
+        route === "home"
+         ? 
+          <Home />
+         :
+         route === "itemsArea" 
+         ?
+         <ItemsArea />
+         :
+         route === "checkout"
+         &&
+         <Checkout />
+      }
+     
+    </>
   );
 }
 
