@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
-import {Modal, Button, Fade, Typography} from '@material-ui/core'
+import {Modal, Button, Typography} from '@material-ui/core'
 import { gotoPage } from '../actions/appActions';
 import CheckoutOrderTable from './CheckoutOrderTable'
 
