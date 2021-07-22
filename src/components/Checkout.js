@@ -88,7 +88,11 @@ function CheckOut() {
         }
         
     },[orderItems]);
-    
+    const onAddOrderItem = (e, data) => {
+        const updateItem = {...data}
+        updateItem.qty +=1;
+        dispatch(updateOrderItem(updateItem));
+    }
     const onOrderHandler = (e) => {
         e.preventDefault();
         const data = {
@@ -130,7 +134,7 @@ function CheckOut() {
                             <TableCell>Qty.</TableCell>
                             <TableCell>Unit price($)</TableCell>
                             <TableCell>Price($)</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell align="right">Add / Remove</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -140,6 +144,7 @@ function CheckOut() {
                                     key={item.name} 
                                     data={item}
                                     priceRow={ccyFormat(priceRow(item.qty, item.price))}
+                                    onAddOrderItem={onAddOrderItem}
                                     onRemoveOrderItem={onRemoveOrderItem}
                                 />
                             ))

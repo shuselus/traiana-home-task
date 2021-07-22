@@ -5,6 +5,7 @@ import TableRow from '@material-ui/core/TableRow';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import DeleteIcon from '@material-ui/icons/Delete';
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -29,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
       },
     })); 
     
-function CheckoutTableRow({data, priceRow, onRemoveOrderItem}) {
+function CheckoutTableRow({data, priceRow, onRemoveOrderItem, onAddOrderItem}) {
     const classes = useStyles();
     const ccyFormat = (num) => {
         return `${num.toFixed(2)}`;
@@ -46,6 +47,9 @@ function CheckoutTableRow({data, priceRow, onRemoveOrderItem}) {
             <TableCell className={classes.rowCell}>{ccyFormat(data.price)}</TableCell>
             <TableCell className={classes.rowCell}>{priceRow}</TableCell>
             <TableCell className={classes.rowCell} align="right">
+                <IconButton onClick={(e) => onAddOrderItem(e,data)}>
+                   <AddCircleOutlineOutlinedIcon />
+                </IconButton>
                 <IconButton onClick={(e) => onRemoveOrderItem(e,data)}>
                     <DeleteIcon />
                 </IconButton>
