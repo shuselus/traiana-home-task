@@ -25,9 +25,6 @@ const useStyles = makeStyles(() => ({
       fontSize: 18,
       padding: 24,
     },
-    title: {
-     
-    },
   }));
   
 
@@ -38,7 +35,7 @@ function Home() {
     return (
         <Container maxWidth="lg" className={classes.root}>
             <Box className={classes.boxTxt}>
-                <Typography variant="h5" gutterBottom className={classes.title}>
+                <Typography variant="h5" gutterBottom>
                         HOW TO MAKE AN INTERESTING SALAD?
                 </Typography>
                 <Typography className={classes.cta}>

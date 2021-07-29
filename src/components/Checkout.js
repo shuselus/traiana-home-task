@@ -88,11 +88,13 @@ function CheckOut() {
         }
         
     },[orderItems]);
-    const onAddOrderItem = (e, data) => {
+
+    const onAddOrderItem = useCallback((e, data) => {
+        e.preventDefault();
         const updateItem = {...data}
         updateItem.qty +=1;
         dispatch(updateOrderItem(updateItem));
-    }
+    },[orderItems]);
     const onOrderHandler = (e) => {
         e.preventDefault();
         const data = {

@@ -38,14 +38,14 @@ function ItemsArea() {
     useEffect(()=>{
         if(orderItems && orderItems.length > 0){
             //enable "Proceed to Checkout" button
-            setPBtnDisabled(false)
+            setPBtnDisabled(false);
         }
     },[orderItems]);
     
     const onAddOrderItem = useCallback((data) => {
         //combine items from the same kind by adding quantity 
         //and update orderItems redux store
-            const updateItem = orderItems?.length ? orderItems.find(item => item.name === data.name) : undefined;
+            const updateItem = orderItems.find(item => item.name === data.name);
             if(updateItem){
                 updateItem.qty += 1;
                 dispatch(updateOrderItem(updateItem));
@@ -57,6 +57,11 @@ function ItemsArea() {
             }
     },[orderItems]);
 
+    const getEddedItemQuantity = (item) => {
+        const addedItem = orderItems.find(added => added.name === item.name);
+        return addedItem ? addedItem.qty : 0;
+     }
+     
     return (  
         <Container maxWidth="lg" className={classes.root}>
             <Typography className={classes.title}>
@@ -69,7 +74,7 @@ function ItemsArea() {
                         key={"item"+idx} 
                         data={item} 
                         image = {`./svgs/${item.name}.svg`} 
-                        //added = {orderItems && orderItems.length ? orderItems.filter(order => order.name === item.name).qty : 0}
+                        added = { getEddedItemQuantity(item) }
                         onAddOrderItem={onAddOrderItem}/>)
             }
             <Divider className={classes.divider} />

@@ -43,15 +43,15 @@ const useStyles = makeStyles((theme) => ({
   }
   })); 
 
-function Item({data, image, /*added,*/ onAddOrderItem}) {
-  const [added, setAdded] = useState(0)
+function Item({data, image, added, onAddOrderItem}) {
+  const [addedQty, setAddedQty] = useState(added);
   const classes = useStyles(); 
   
   const onAddItem = (e) => {
     e.preventDefault();
     data.image = image;
     onAddOrderItem(data);
-    setAdded(prev => prev + 1);
+    setAddedQty(prev => prev + 1);
   }
     return (
       <>
@@ -64,8 +64,8 @@ function Item({data, image, /*added,*/ onAddOrderItem}) {
         </ListItemAvatar>
         <ListItemText primary={data.name} secondary={"$"+data.price} />
         {
-          added > 0 && 
-          <Typography>added {added} {added > 1 ? "items" : "item"}</Typography>
+          addedQty > 0 && 
+          <Typography>added {addedQty} {addedQty > 1 ? "items" : "item"}</Typography>
         }
        <IconButton>
          <AddCircleOutlineOutlinedIcon />

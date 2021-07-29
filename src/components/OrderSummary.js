@@ -2,11 +2,11 @@ import React, { useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 import {Modal, Button, Typography} from '@material-ui/core'
-import { gotoPage } from '../actions/appActions';
+import { setOrderItems, gotoPage } from '../actions/appActions';
 import CheckoutOrderTable from './CheckoutOrderTable'
 
 const useStyles = makeStyles((theme) => ({
-    root: {
+      root: {
         flexGrow: 1,
       },
       modal: {
@@ -42,10 +42,10 @@ function OrderSummary({data}) {//{orderItems, totalPrice}
     const dispatch = useDispatch();  
 
     const handleClose = () => {
+        dispatch(setOrderItems([]));
         dispatch(gotoPage("home"))
     }
     return (
-      <div className={classes.root} ref={rootRef} >
         <Modal
          disableEnforceFocus
          disableAutoFocus
@@ -68,12 +68,8 @@ function OrderSummary({data}) {//{orderItems, totalPrice}
                    Close
                </Button>
             </div>
-       
-     
-          
-          
         </Modal>
-      </div>
+  
     );
 }
 
